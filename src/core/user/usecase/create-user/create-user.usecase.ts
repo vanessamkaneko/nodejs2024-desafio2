@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { User } from '../../entity/user.entity';
 import { IUserGateway } from 'src/application/operation/gateway/user/IUserGateway';
@@ -11,11 +11,9 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(user: CreateUserDto): Promise<User> {
-    if (!user.name || !user.email) {
-      throw new BadRequestException(
-        'A user must have a name and a email to be created!',
-      );
-    }
+    // if (!user.name || !user.email) {
+    //   throw new BadRequestException('Name and email are required!');
+    // }
 
     const newUser = User.new(user);
 

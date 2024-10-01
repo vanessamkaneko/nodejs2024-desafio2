@@ -4,3 +4,5 @@ import { User } from 'src/core/user/entity/user.entity';
 export interface IUserMongoDbRepository {
   create(user: CreateUserDto): Promise<User>;
 }
+
+export const IUserMongoDbRepository = Symbol('IUserMongoDbRepository');

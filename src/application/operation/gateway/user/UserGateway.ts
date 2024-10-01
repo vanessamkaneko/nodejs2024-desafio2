@@ -10,7 +10,9 @@ export class UserGateway implements IUserGateway {
     private userRepository: IUserMongoDbRepository,
   ) {}
 
-  createUser(user: CreateUserDto): Promise<User> {
-    throw new Error('Method not implemented.');
+  async createUser(user: CreateUserDto): Promise<User> {
+    const createUser = await this.userRepository.create(user);
+
+    return createUser;
   }
 }
