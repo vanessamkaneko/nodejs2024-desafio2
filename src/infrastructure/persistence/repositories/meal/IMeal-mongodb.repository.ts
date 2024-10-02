@@ -7,6 +7,7 @@ export interface IMealMongoDbRepository {
   findById(id: string): Promise<Meal | null>;
   update(id: string, payload: UpdateMealDto): Promise<Meal>;
   delete(id: string): Promise<void>;
+  findByUserId(userId: string): Promise<Meal[]>;
 }
 
 export const IMealMongoDbRepository = Symbol('IMealMongoDbRepository');

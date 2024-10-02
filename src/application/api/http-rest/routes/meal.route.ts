@@ -47,22 +47,38 @@ export class MealControllerRoute {
   async update(
     @Param('id') id: string,
     @Body() payload: UpdateMealDto,
+    @Session() session: any,
   ): Promise<Meal> {
-    const updateMeal = await this.updateMealController.handle(id, payload);
+    const updateMeal = await this.updateMealController.handle(
+      id,
+      payload,
+      session.userId,
+    );
     return updateMeal;
   }
 
   @Delete('/delete/:id')
-  async delete(@Param('id') id: string): Promise<void> {
-    const deleteMeal = await this.deleteMealController.handle(id);
+  async delete(
+    @Param('id') id: string,
+    @Session() session: any,
+  ): Promise<void> {
+    const deleteMeal = await this.deleteMealController.handle(
+      id,
+      session.userId,
+    );
 
     return deleteMeal;
   }
 
   @Get('/:id')
-  async getMeal(@Param('id') id: string): Promise<Meal> {
-    const meal = await this.getMealController.handle(id);
+  async getMeal(
+    @Param('id') id: string,
+    @Session() session: any,
+  ): Promise<Meal> {
+    const meal = await this.getMealController.handle(id, session.userId);
 
     return meal;
   }
 }
+
+//66fdce48c021f1e3bedfd826

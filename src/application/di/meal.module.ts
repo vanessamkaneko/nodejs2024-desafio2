@@ -18,7 +18,6 @@ import { IMealGateway } from '../operation/gateway/meal/IMealGateway';
 import { MealGateway } from '../operation/gateway/meal/MealGateway';
 import { IUserGateway } from '../operation/gateway/user/IUserGateway';
 import { UserGateway } from '../operation/gateway/user/UserGateway';
-import { CurrentUserMiddleware } from 'src/core/user/middlewares/current-user.middleware';
 
 const persistenceProviders: Provider[] = [
   {
@@ -47,12 +46,6 @@ const persistenceProviders: Provider[] = [
     provide: CurrentUserInterceptor,
     useFactory: (userGateway: IUserGateway) =>
       new CurrentUserInterceptor(userGateway),
-    inject: [IUserGateway],
-  },
-  {
-    provide: CurrentUserMiddleware,
-    useFactory: (userGateway: IUserGateway) =>
-      new CurrentUserMiddleware(userGateway),
     inject: [IUserGateway],
   },
 ];

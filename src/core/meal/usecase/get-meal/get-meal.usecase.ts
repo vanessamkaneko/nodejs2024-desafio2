@@ -9,11 +9,17 @@ export class GetMealUseCase {
     private mealGateway: IMealGateway,
   ) {}
 
-  async execute(id: string): Promise<Meal> {
+  async execute(id: string, userId: string): Promise<Meal> {
     const meal = await this.mealGateway.findMealById(id);
 
     if (!meal) {
       throw new BadRequestException('Meal not found!');
+    }
+
+    if (meal.userId !== userId) {
+      throw new BadRequestException(
+        'You do not have permission to view this meal!',
+      );
     }
 
     return meal;

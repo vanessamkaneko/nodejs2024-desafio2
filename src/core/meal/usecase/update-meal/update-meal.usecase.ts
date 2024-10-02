@@ -10,11 +10,21 @@ export class UpdateMealUseCase {
     private mealGateway: IMealGateway,
   ) {}
 
-  async execute(id: string, payload: UpdateMealDto): Promise<Meal> {
+  async execute(
+    id: string,
+    payload: UpdateMealDto,
+    userId: string,
+  ): Promise<Meal> {
     const meal = await this.mealGateway.findMealById(id);
 
     if (!meal) {
       throw new BadRequestException('Meal not found!');
+    }
+
+    if (meal.userId !== userId) {
+      throw new BadRequestException(
+        'You do not have permission to update this meal!',
+      );
     }
 
     const updateMeal = await this.mealGateway.updateMeal(id, payload);

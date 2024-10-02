@@ -7,6 +7,7 @@ export interface IMealGateway {
   findMealById(id: string): Promise<Meal | null>;
   updateMeal(id: string, payload: UpdateMealDto): Promise<Meal>;
   deleteMeal(id: string): Promise<void>;
+  findByUserId(userId: string): Promise<Meal[]>;
 }
 
 export const IMealGateway = Symbol('IMealGateway');

@@ -21,6 +21,14 @@ export class MealMongoDbRepository implements IMealMongoDbRepository {
     return meal;
   }
 
+  async findByUserId(userId: string): Promise<Meal[]> {
+    const meals = await MealModel.find({
+      userId,
+    });
+
+    return meals;
+  }
+
   async update(id: string, payload: UpdateMealDto): Promise<Meal> {
     const updatedMeal = await MealModel.findByIdAndUpdate(
       id,

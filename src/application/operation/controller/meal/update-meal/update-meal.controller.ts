@@ -9,8 +9,16 @@ export class UpdateMealController {
     private updateMealUseCase: UpdateMealUseCase,
   ) {}
 
-  async handle(id: string, payload: UpdateMealDto): Promise<Meal> {
-    const updateMeal = await this.updateMealUseCase.execute(id, payload);
+  async handle(
+    id: string,
+    payload: UpdateMealDto,
+    userId: string,
+  ): Promise<Meal> {
+    const updateMeal = await this.updateMealUseCase.execute(
+      id,
+      payload,
+      userId,
+    );
 
     return updateMeal;
   }

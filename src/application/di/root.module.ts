@@ -1,7 +1,6 @@
-import { MiddlewareConsumer, Module, Provider } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Module, Provider } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER } from '@nestjs/core';
-import { CurrentUserMiddleware } from 'src/core/user/middlewares/current-user.middleware';
 import { MongoDbService } from 'src/infrastructure/persistence/bds/mongodb/MongoDb.service';
 import { GlobalExceptionFilter } from '../api/http-rest/global-exception/global.exception';
 import { MealModule } from './meal.module';
@@ -23,12 +22,6 @@ const persistenceProviders: Provider[] = [
       new UserGateway(userMongoDbRepository),
     inject: [IUserMongoDbRepository],
   },
-  {
-    provide: CurrentUserMiddleware,
-    useFactory: (userGateway: IUserGateway) =>
-      new CurrentUserMiddleware(userGateway),
-    inject: [IUserGateway],
-  },
 ];
 
 @Module({
@@ -43,12 +36,4 @@ const persistenceProviders: Provider[] = [
     MongoDbService,
   ],
 })
-export class RootModule {
-  constructor(private configService: ConfigService) {}
-
-  /* essa função será chamada automaticamente sempre que nossa aplicação startar; nela podemos definir uma middleware que
-  irá executar p/ todas as requests recebidas em todas as rotas (middleware GLOBAL) */
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(CurrentUserMiddleware).forRoutes('*'); // Apply globally
-  }
-}
+export class RootModule {}

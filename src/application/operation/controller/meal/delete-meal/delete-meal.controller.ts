@@ -7,8 +7,8 @@ export class DeleteMealController {
     private deleteMealUseCase: DeleteMealUseCase,
   ) {}
 
-  async handle(id: string): Promise<void> {
-    const deleteMeal = await this.deleteMealUseCase.execute(id);
+  async handle(id: string, userId: string): Promise<void> {
+    const deleteMeal = await this.deleteMealUseCase.execute(id, userId);
 
     return deleteMeal;
   }

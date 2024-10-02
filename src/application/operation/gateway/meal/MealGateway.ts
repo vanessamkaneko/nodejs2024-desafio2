@@ -23,6 +23,12 @@ export class MealGateway implements IMealGateway {
     return meal;
   }
 
+  async findByUserId(userId: string): Promise<Meal[]> {
+    const meals = await this.mealRepository.findByUserId(userId);
+
+    return meals;
+  }
+
   async updateMeal(id: string, payload: UpdateMealDto): Promise<Meal> {
     const updateMeal = await this.mealRepository.update(id, payload);
 

@@ -8,8 +8,8 @@ export class GetMealController {
     private getMealUseCase: GetMealUseCase,
   ) {}
 
-  async handle(id: string): Promise<Meal> {
-    const meal = await this.getMealUseCase.execute(id);
+  async handle(id: string, userId: string): Promise<Meal> {
+    const meal = await this.getMealUseCase.execute(id, userId);
 
     return meal;
   }
