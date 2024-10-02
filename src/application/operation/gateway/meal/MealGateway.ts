@@ -28,4 +28,10 @@ export class MealGateway implements IMealGateway {
 
     return updateMeal;
   }
+
+  async deleteMeal(id: string): Promise<void> {
+    const deleteMeal = await this.mealRepository.delete(id);
+
+    return deleteMeal;
+  }
 }

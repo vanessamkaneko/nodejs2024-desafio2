@@ -6,6 +6,10 @@ import { UserModel } from '../../bds/mongodb/schema/userModel';
 
 @Injectable()
 export class UserMongoDbRepository implements IUserMongoDbRepository {
+  async findById(userId: string): Promise<User> {
+    const user = await UserModel.findById(userId);
+    return user;
+  }
   async create(user: CreateUserDto): Promise<User> {
     const createdUser = await UserModel.create({ ...user });
 

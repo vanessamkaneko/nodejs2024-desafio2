@@ -7,6 +7,12 @@ export const MealSchema = new Schema<MealEntity>({
   description: { type: String, required: true },
   on_diet: { type: Boolean, required: true },
   date: { type: Date, default: Date.now },
+
+  userId: {
+    type: String,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export const MealModel = mongoose.model('Meal', MealSchema);

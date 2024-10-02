@@ -15,7 +15,7 @@ export class MealMongoDbRepository implements IMealMongoDbRepository {
     return createdMeal;
   }
 
-  async findById(id: string): Promise<Meal> {
+  async findById(id: string): Promise<Meal | null> {
     const meal = await MealModel.findById(id);
 
     return meal;
@@ -33,5 +33,9 @@ export class MealMongoDbRepository implements IMealMongoDbRepository {
     );
 
     return updatedMeal;
+  }
+
+  async delete(id: string): Promise<void> {
+    await MealModel.deleteOne({ _id: id });
   }
 }

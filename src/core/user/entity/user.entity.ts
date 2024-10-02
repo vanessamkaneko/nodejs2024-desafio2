@@ -1,9 +1,13 @@
+import { Meal } from 'src/core/meal/entity/meal.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
 
 export class User {
+  _id?: string;
   name: string;
 
   email: string;
+
+  meals?: Meal[];
 
   private constructor(payload: CreateUserDto) {
     this.name = payload.name;

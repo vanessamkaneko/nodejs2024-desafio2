@@ -10,6 +10,12 @@ export class UserGateway implements IUserGateway {
     private userRepository: IUserMongoDbRepository,
   ) {}
 
+  async findUserById(userId: string): Promise<User> {
+    const user = await this.userRepository.findById(userId);
+
+    return user;
+  }
+
   async createUser(user: CreateUserDto): Promise<User> {
     const createUser = await this.userRepository.create(user);
 

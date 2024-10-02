@@ -10,7 +10,7 @@ export class CreateMealUseCase {
     private mealGateway: IMealGateway,
   ) {}
 
-  async execute(meal: CreateMealDto): Promise<Meal> {
+  async execute(meal: CreateMealDto, userId: string): Promise<Meal> {
     // const { description, name, on_diet } = meal;
 
     // if (!description || !name || on_diet === undefined) {
@@ -19,7 +19,7 @@ export class CreateMealUseCase {
     //   );
     // }
 
-    const newMeal = Meal.new(meal);
+    const newMeal = Meal.new(meal, userId);
 
     const createdMeal = await this.mealGateway.createMeal(newMeal);
 

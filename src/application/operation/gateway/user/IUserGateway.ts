@@ -3,6 +3,7 @@ import { User } from 'src/core/user/entity/user.entity';
 
 export interface IUserGateway {
   createUser(user: CreateUserDto): Promise<User>;
+  findUserById(userId: string): Promise<User>;
 }
 
 export const IUserGateway = Symbol('IUserGateway');

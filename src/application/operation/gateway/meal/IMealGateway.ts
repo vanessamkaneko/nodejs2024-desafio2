@@ -4,8 +4,9 @@ import { Meal } from 'src/core/meal/entity/meal.entity';
 
 export interface IMealGateway {
   createMeal(meal: CreateMealDto): Promise<Meal>;
-  findMealById(id: string): Promise<Meal>;
+  findMealById(id: string): Promise<Meal | null>;
   updateMeal(id: string, payload: UpdateMealDto): Promise<Meal>;
+  deleteMeal(id: string): Promise<void>;
 }
 
 export const IMealGateway = Symbol('IMealGateway');

@@ -9,8 +9,8 @@ export class CreateMealController {
     private createMealUseCase: CreateMealUseCase,
   ) {}
 
-  async handle(meal: CreateMealDto): Promise<Meal> {
-    const createMeal = await this.createMealUseCase.execute(meal);
+  async handle(meal: CreateMealDto, userId: string): Promise<Meal> {
+    const createMeal = await this.createMealUseCase.execute(meal, userId);
 
     return createMeal;
   }
